@@ -57,25 +57,233 @@
 		<style>
 			html
 			{
-				height: 90%;
+				height: 100%;
+				display: table;
+				margin: auto;
 			}
 			body
 			{
+				/*top: 45%;*/
+				display: table-cell;
+				position:relative;
 				font: 1.2em/1 sans-serif;
 				color: #444;
 				text-align: center;
-				height:inherit;
+				vertical-align: middle;
 			}
-			h1
+			.menu
 			{
-				top: 45%;
-				position:relative;
+				margin: 0em auto;
+				line-height: 1.2em;
+				text-align: left;
+				max-width: 18em;
+			}
+			.menu input:not(.muteIn)
+			{
+				width: 6em;
+			}
+			.warning
+			{
+				text-align: center;
+				background-color: red;
+				border: 2px solid black;
+				border-radius: 10px;
+				font-weight: bold;
+				color: black;
 			}
 		</style>
 	</head>
 	<body>
-		<h1>
+		<h1 class="h">
 			important sound
 		</h1>
+		<div class="menu">
+			<p class="warning">
+				WARNING! By customising the parameters of the sound, you may distort its importance.
+			</p>
+			<div class="type">
+				<select class="typeIn">
+					<option value="sine">
+						sine
+					</option>
+					<option value="square">
+						square
+					</option>
+					<option value="sawtooth">
+						sawtooth
+					</option>
+					<option value="triangle">
+						triangle
+					</option>
+				</select>
+				<div class="typeMessage" style="float: right">
+					sound type
+				</div>
+			</div>
+			<div class="volume">
+				<input class="volumeIn" type="range" max="1" min="0.01" step="0.05">
+				<div class="volumeMessage" style="float: right">
+					volume
+				</div>
+			</div>
+			<div class="durationMin">
+				<input class="durationMinIn" type="number">
+				<div class="durationMinMessage" style="float: right">
+					min duration
+				</div>
+			</div>
+			<div class="durationMax">
+				<input class="durationMaxIn" type="number">
+				<div class="durationMaxMessage" style="float: right">
+					max duration
+				</div>
+			</div>
+			<div class="frequencyMin">
+				<input class="frequencyMinIn" type="number">
+				<div class="frequencyMinMessage" style="float: right">
+					min frequency
+				</div>
+			</div>
+			<div class="frequencyMax">
+				<input class="frequencyMaxIn" type="number">
+				<div class="frequencyMaxMessage" style="float: right">
+					max frequency
+				</div>
+			</div>
+			<div class="sleepTimeMin">
+				<input class="sleepTimeMinIn" type="number">
+				<div class="sleepTimeMinMessage" style="float: right">
+					min quiet time
+				</div>
+			</div>
+			<div class="sleepTimeMax">
+				<input class="sleepTimeMaxIn" type="number">
+				<div class="sleepTimeMaxMessage" style="float: right">
+					max quiet time
+				</div>
+			</div>
+			<div class="mute">
+				<input class="muteIn" type="checkbox">
+				<div class="muteMessage" style="float: right">
+					mute
+				</div>
+			</div>
+		</div>
+		<script>
+			var menu=document.querySelector('.menu');
+			var h=document.querySelector('.h');
+			function showMenu()
+			{
+				menu.style.visibility='visible';
+				h.removeEventListener('click',showMenu);
+				h.addEventListener('click',hideMenu);
+			}
+			function hideMenu()
+			{
+				menu.style.visibility='hidden';
+				h.removeEventListener('click',hideMenu);
+				h.addEventListener('click',showMenu);
+			}
+			function setDurationMin()
+			{
+				if (Number(durationMinIn.value)>=Number(durationMinIn.min))
+					if (Number(durationMinIn.value)<=Number(durationMinIn.max))
+					{
+						durationMin=durationMinIn.value;
+						durationMaxIn.min=durationMinIn.value;
+					}
+			}
+			function setDurationMax()
+			{
+				if (Number(durationMaxIn.value)>=Number(durationMaxIn.min))
+					if (Number(durationMaxIn.value)<=Number(durationMaxIn.max))
+					{
+						durationMax=durationMaxIn.value;
+						durationMinIn.max=durationMaxIn.value;
+					}
+			}
+			function setFrequencyMin()
+			{
+				if (Number(frequencyMinIn.value)>=Number(frequencyMinIn.min))
+					if (Number(frequencyMinIn.value)<=Number(frequencyMinIn.max))
+					{
+						frequencyMin=frequencyMinIn.value;
+						frequencyMaxIn.min=frequencyMinIn.value;
+					}
+			}
+			function setFrequencyMax()
+			{
+				if (Number(frequencyMaxIn.value)>=Number(frequencyMaxIn.min))
+					if (Number(frequencyMaxIn.value)<=Number(frequencyMaxIn.max))
+					{
+						frequencyMax=frequencyMaxIn.value;
+						frequencyMinIn.max=frequencyMaxIn.value;
+					}
+			}
+			function setSleepTimeMin()
+			{
+				if (Number(sleepTimeMinIn.value)>=Number(sleepTimeMinIn.min))
+					if (Number(sleepTimeMinIn.value)<=Number(sleepTimeMinIn.max))
+					{
+						sleepTimeMin=sleepTimeMinIn.value;
+						sleepTimeMaxIn.min=sleepTimeMinIn.value;
+					}
+			}
+			function setSleepTimeMax()
+			{
+				if (Number(sleepTimeMaxIn.value)>=Number(sleepTimeMaxIn.min))
+					if (Number(sleepTimeMaxIn.value)<=Number(sleepTimeMaxIn.max))
+					{
+						sleepTimeMax=sleepTimeMaxIn.value;
+						sleepTimeMinIn.max=sleepTimeMaxIn.value;
+					}
+			}
+			hideMenu();
+			var muteIn=document.querySelector('.muteIn');
+			muteIn.checked=!flag;
+			muteIn.addEventListener('input',function(){flag=!muteIn.checked});
+			var volumeIn=document.querySelector('.volumeIn');
+			volumeIn.value=volume;
+			volumeIn.addEventListener('input',function(){volume=volumeIn.value});
+			var typeIn=document.querySelector('.typeIn');
+			typeIn.value=type;
+			typeIn.addEventListener('input',function(){type=typeIn.value});
+
+			var durationMinIn=document.querySelector('.durationMinIn');
+			durationMinIn.value=durationMin;
+			durationMinIn.min=0;
+			durationMinIn.max=durationMax;
+			durationMinIn.addEventListener('input',setDurationMin);
+
+			var durationMaxIn=document.querySelector('.durationMaxIn');
+			durationMaxIn.value=durationMax;
+			durationMaxIn.max=10000;
+			durationMaxIn.min=durationMin;
+			durationMaxIn.addEventListener('input',setDurationMax);
+
+			var frequencyMinIn=document.querySelector('.frequencyMinIn');
+			frequencyMinIn.value=frequencyMin;
+			frequencyMinIn.min=10;
+			frequencyMinIn.max=frequencyMax;
+			frequencyMinIn.addEventListener('input',setFrequencyMin);
+
+			var frequencyMaxIn=document.querySelector('.frequencyMaxIn');
+			frequencyMaxIn.value=frequencyMax;
+			frequencyMaxIn.max=20000;
+			frequencyMaxIn.min=frequencyMin;
+			frequencyMaxIn.addEventListener('input',setFrequencyMax);
+
+			var sleepTimeMinIn=document.querySelector('.sleepTimeMinIn');
+			sleepTimeMinIn.value=sleepTimeMin;
+			sleepTimeMinIn.min=0;
+			sleepTimeMinIn.max=sleepTimeMax;
+			sleepTimeMinIn.addEventListener('input',setSleepTimeMin);
+
+			var sleepTimeMaxIn=document.querySelector('.sleepTimeMaxIn');
+			sleepTimeMaxIn.value=sleepTimeMax;
+			sleepTimeMaxIn.max=10000;
+			sleepTimeMaxIn.min=sleepTimeMin;
+			sleepTimeMaxIn.addEventListener('input',setSleepTimeMax);
+		</script>
 	</body>
 </html>
