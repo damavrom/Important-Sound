@@ -35,15 +35,22 @@
 
 			var flag=true;
 			var sleepTime;
-			var volume=0.1;
+			var volume=0.01;
+			var durationMin=100;
+			var durationMax=1000;
+			var frequencyMin=100;
+			var frequencyMax=1000;
+			var sleepTimeMin=100;
+			var sleepTimeMax=1000;
+			var type="square"
 			function beepIntervals()
 			{
-				var duration=Math.floor(Math.random()*900+100);
-				var frequency=Math.floor(Math.random()*900+100);
-				beep(duration,frequency,volume,"square");
-				var sleepTime=Math.floor(Math.random()*900+100)+duration;
+				var duration=Math.floor(Math.random()*(durationMax-durationMin)+durationMin);
+				var frequency=Math.floor(Math.random()*(frequencyMax-frequencyMin)+frequencyMin);
 				if (flag)
-					setTimeout(beepIntervals,sleepTime);
+					beep(duration,frequency,volume,type);
+				var sleepTime=Math.floor(Math.random()*(sleepTimeMax-sleepTimeMin)+sleepTimeMin)+duration;
+				setTimeout(beepIntervals,sleepTime);
 			}
 			beepIntervals();
 		</script>
