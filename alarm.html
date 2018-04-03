@@ -75,12 +75,12 @@
 			{
 				margin: 0em auto;
 				line-height: 1.2em;
-				text-align: left;
+				text-align: right;
 				max-width: 18em;
 			}
 			.menu input:not(.muteIn)
 			{
-				width: 6em;
+				width: 4em;
 			}
 			.warning
 			{
@@ -102,7 +102,7 @@
 				WARNING! By customising the parameters of the sound, you may distort its importance.
 			</p>
 			<div class="type">
-				<select class="typeIn">
+				<select class="typeIn" style="width: 9em">
 					<option value="sine">
 						sine
 					</option>
@@ -116,55 +116,36 @@
 						triangle
 					</option>
 				</select>
-				<div class="typeMessage" style="float: right">
+				<div class="typeMessage" style="float: left">
 					sound type
 				</div>
 			</div>
 			<div class="volume">
-				<input class="volumeIn" type="range" max="1" min="0.01" step="0.05">
-				<div class="volumeMessage" style="float: right">
+				<input class="volumeIn" type="range" max="1" min="0.01" step="0.05" style="width: 9em">
+				<div class="volumeMessage" style="float: left">
 					volume
 				</div>
 			</div>
-			<div class="durationMin">
-				<input class="durationMinIn" type="number">
-				<div class="durationMinMessage" style="float: right">
-					min duration
+			<div class="duration">
+				<input class="durationMinIn" type="number">:<input class="durationMaxIn" type="number">
+				<div class="durationMinMessage" style="float: left">
+					duration
+				</div>
+			<div class="frequency">
+				<input class="frequencyMinIn" type="number">:<input class="frequencyMaxIn" type="number">
+				<div class="frequencyMaxMessage" style="float: left">
+					frequency
 				</div>
 			</div>
-			<div class="durationMax">
-				<input class="durationMaxIn" type="number">
-				<div class="durationMaxMessage" style="float: right">
-					max duration
-				</div>
-			</div>
-			<div class="frequencyMin">
-				<input class="frequencyMinIn" type="number">
-				<div class="frequencyMinMessage" style="float: right">
-					min frequency
-				</div>
-			</div>
-			<div class="frequencyMax">
-				<input class="frequencyMaxIn" type="number">
-				<div class="frequencyMaxMessage" style="float: right">
-					max frequency
-				</div>
-			</div>
-			<div class="sleepTimeMin">
-				<input class="sleepTimeMinIn" type="number">
-				<div class="sleepTimeMinMessage" style="float: right">
-					min quiet time
-				</div>
-			</div>
-			<div class="sleepTimeMax">
-				<input class="sleepTimeMaxIn" type="number">
-				<div class="sleepTimeMaxMessage" style="float: right">
-					max quiet time
+			<div class="sleepTime">
+				<input class="sleepTimeMinIn" type="number">:<input class="sleepTimeMaxIn" type="number">
+				<div class="sleepTimeMaxMessage" style="float: left">
+					quiet time
 				</div>
 			</div>
 			<div class="mute">
 				<input class="muteIn" type="checkbox">
-				<div class="muteMessage" style="float: right">
+				<div class="muteMessage" style="float: left">
 					mute
 				</div>
 			</div>
@@ -241,7 +222,7 @@
 			hideMenu();
 			var muteIn=document.querySelector('.muteIn');
 			muteIn.checked=!flag;
-			muteIn.addEventListener('input',function(){flag=!muteIn.checked});
+			muteIn.addEventListener('input',function(){flag=!(muteIn.checked)});
 			var volumeIn=document.querySelector('.volumeIn');
 			volumeIn.value=volume;
 			volumeIn.addEventListener('input',function(){volume=volumeIn.value});
