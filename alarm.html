@@ -42,7 +42,7 @@
 			var frequencyMax=1000;
 			var sleepTimeMin=100;
 			var sleepTimeMax=1000;
-			var type="square"
+			var type='square'
 			var duration;
 			var frequency;
 			var sleepTime;
@@ -51,7 +51,14 @@
 				duration=Math.random()*(durationMax-durationMin)+durationMin;
 				frequency=Math.random()*(frequencyMax-frequencyMin)+frequencyMin;
 				if (flag)
-					beep(duration,frequency,volume,type);
+					if (type==='all')
+					{
+						var types=['sine','square','sawtooth','triangle'];
+						var pick=types[Math.floor(Math.random()*types.length)]
+						beep(duration,frequency,volume,pick);
+					}
+					else
+						beep(duration,frequency,volume,type);
 				sleepTime=Math.random()*(sleepTimeMax-sleepTimeMin)+sleepTimeMin+duration;
 				setTimeout(beepIntervals,sleepTime);
 			}
@@ -118,6 +125,9 @@
 					</option>
 					<option value="triangle">
 						triangle
+					</option>
+					<option value="all">
+						all
 					</option>
 				</select>
 				<div class="typeMessage" style="float: left">
