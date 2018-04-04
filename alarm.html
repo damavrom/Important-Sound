@@ -166,16 +166,18 @@
 		</div>
 		<script>
 			var menu=document.querySelector('.menu');
+			var warning=document.querySelector('.warning');
+			warning.addEventListener('click',warning.remove);
 			var h=document.querySelector('.h');
 			function showMenu()
 			{
-				menu.style.visibility='visible';
+				menu.style.display='block';
 				h.removeEventListener('click',showMenu);
 				h.addEventListener('click',hideMenu);
 			}
 			function hideMenu()
 			{
-				menu.style.visibility='hidden';
+				menu.style.display='none';
 				h.removeEventListener('click',hideMenu);
 				h.addEventListener('click',showMenu);
 			}
