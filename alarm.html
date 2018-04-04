@@ -43,13 +43,16 @@
 			var sleepTimeMin=100;
 			var sleepTimeMax=1000;
 			var type="square"
+			var duration;
+			var frequency;
+			var sleepTime;
 			function beepIntervals()
 			{
-				var duration=Math.floor(Math.random()*(durationMax-durationMin)+durationMin);
-				var frequency=Math.floor(Math.random()*(frequencyMax-frequencyMin)+frequencyMin);
+				duration=Math.random()*(durationMax-durationMin)+durationMin;
+				frequency=Math.random()*(frequencyMax-frequencyMin)+frequencyMin;
 				if (flag)
 					beep(duration,frequency,volume,type);
-				var sleepTime=Math.floor(Math.random()*(sleepTimeMax-sleepTimeMin)+sleepTimeMin)+duration;
+				sleepTime=Math.random()*(sleepTimeMax-sleepTimeMin)+sleepTimeMin+duration;
 				setTimeout(beepIntervals,sleepTime);
 			}
 			beepIntervals();
@@ -74,7 +77,7 @@
 			.menu
 			{
 				margin: 0em auto;
-				line-height: 1.2em;
+				line-height: 1.6em;
 				text-align: right;
 				max-width: 18em;
 			}
@@ -88,6 +91,7 @@
 				background-color: red;
 				border: 2px solid black;
 				border-radius: 10px;
+				line-height: 1.2em;
 				font-weight: bold;
 				color: black;
 			}
@@ -126,17 +130,17 @@
 					volume
 				</div>
 			</div>
-			<div class="duration">
-				<input class="durationMinIn" type="number">:<input class="durationMaxIn" type="number">
-				<div class="durationMinMessage" style="float: left">
-					duration
-				</div>
 			<div class="frequency">
 				<input class="frequencyMinIn" type="number">:<input class="frequencyMaxIn" type="number">
 				<div class="frequencyMaxMessage" style="float: left">
 					frequency
 				</div>
 			</div>
+			<div class="duration">
+				<input class="durationMinIn" type="number">:<input class="durationMaxIn" type="number">
+				<div class="durationMinMessage" style="float: left">
+					duration
+				</div>
 			<div class="sleepTime">
 				<input class="sleepTimeMinIn" type="number">:<input class="sleepTimeMaxIn" type="number">
 				<div class="sleepTimeMaxMessage" style="float: left">
@@ -170,8 +174,8 @@
 				if (Number(durationMinIn.value)>=Number(durationMinIn.min))
 					if (Number(durationMinIn.value)<=Number(durationMinIn.max))
 					{
-						durationMin=durationMinIn.value;
-						durationMaxIn.min=durationMinIn.value;
+						durationMin=Number(durationMinIn.value);
+						durationMaxIn.min=Number(durationMinIn.value);
 					}
 			}
 			function setDurationMax()
@@ -179,8 +183,8 @@
 				if (Number(durationMaxIn.value)>=Number(durationMaxIn.min))
 					if (Number(durationMaxIn.value)<=Number(durationMaxIn.max))
 					{
-						durationMax=durationMaxIn.value;
-						durationMinIn.max=durationMaxIn.value;
+						durationMax=Number(durationMaxIn.value);
+						durationMinIn.max=Number(durationMaxIn.value);
 					}
 			}
 			function setFrequencyMin()
@@ -188,8 +192,8 @@
 				if (Number(frequencyMinIn.value)>=Number(frequencyMinIn.min))
 					if (Number(frequencyMinIn.value)<=Number(frequencyMinIn.max))
 					{
-						frequencyMin=frequencyMinIn.value;
-						frequencyMaxIn.min=frequencyMinIn.value;
+						frequencyMin=Number(frequencyMinIn.value);
+						frequencyMaxIn.min=Number(frequencyMinIn.value);
 					}
 			}
 			function setFrequencyMax()
@@ -197,8 +201,8 @@
 				if (Number(frequencyMaxIn.value)>=Number(frequencyMaxIn.min))
 					if (Number(frequencyMaxIn.value)<=Number(frequencyMaxIn.max))
 					{
-						frequencyMax=frequencyMaxIn.value;
-						frequencyMinIn.max=frequencyMaxIn.value;
+						frequencyMax=Number(frequencyMaxIn.value);
+						frequencyMinIn.max=Number(frequencyMaxIn.value);
 					}
 			}
 			function setSleepTimeMin()
@@ -206,8 +210,8 @@
 				if (Number(sleepTimeMinIn.value)>=Number(sleepTimeMinIn.min))
 					if (Number(sleepTimeMinIn.value)<=Number(sleepTimeMinIn.max))
 					{
-						sleepTimeMin=sleepTimeMinIn.value;
-						sleepTimeMaxIn.min=sleepTimeMinIn.value;
+						sleepTimeMin=Number(sleepTimeMinIn.value);
+						sleepTimeMaxIn.min=Number(sleepTimeMinIn.value);
 					}
 			}
 			function setSleepTimeMax()
@@ -215,8 +219,8 @@
 				if (Number(sleepTimeMaxIn.value)>=Number(sleepTimeMaxIn.min))
 					if (Number(sleepTimeMaxIn.value)<=Number(sleepTimeMaxIn.max))
 					{
-						sleepTimeMax=sleepTimeMaxIn.value;
-						sleepTimeMinIn.max=sleepTimeMaxIn.value;
+						sleepTimeMax=Number(sleepTimeMaxIn.value);
+						sleepTimeMinIn.max=Number(sleepTimeMaxIn.value);
 					}
 			}
 			hideMenu();
@@ -232,7 +236,7 @@
 
 			var durationMinIn=document.querySelector('.durationMinIn');
 			durationMinIn.value=durationMin;
-			durationMinIn.min=0;
+			durationMinIn.min=1;
 			durationMinIn.max=durationMax;
 			durationMinIn.addEventListener('input',setDurationMin);
 
