@@ -83,6 +83,7 @@
 			}
 			.menu
 			{
+				display: none;
 				margin: 0em auto;
 				line-height: 1.6em;
 				text-align: right;
@@ -169,6 +170,7 @@
 			var warning=document.querySelector('.warning');
 			warning.addEventListener('click',warning.remove);
 			var h=document.querySelector('.h');
+			h.addEventListener('click',showMenu);
 			function showMenu()
 			{
 				menu.style.display='block';
@@ -235,7 +237,6 @@
 						sleepTimeMinIn.max=Number(sleepTimeMaxIn.value);
 					}
 			}
-			hideMenu();
 			var muteIn=document.querySelector('.muteIn');
 			muteIn.checked=!flag;
 			muteIn.addEventListener('input',function(){flag=!(muteIn.checked)});
