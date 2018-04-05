@@ -35,7 +35,7 @@
 
 			var flag=true;
 			var sleepTime;
-			var volume=0.01;
+			var volume=0.05;
 			var durationMin=100;
 			var durationMax=1000;
 			var frequencyMin=100;
@@ -89,7 +89,7 @@
 				text-align: right;
 				max-width: 18em;
 			}
-			.menu input:not(.muteIn)
+			.menu input
 			{
 				width: 4em;
 			}
@@ -136,7 +136,7 @@
 				</div>
 			</div>
 			<div class="volume">
-				<input class="volumeIn" type="range" max="1" min="0.01" step="0.05" style="width: 9em">
+				<input class="volumeIn" type="range" max="1" min="0.00" step="0.05" style="width: 9em">
 				<div class="volumeMessage" style="float: left">
 					volume
 				</div>
@@ -156,12 +156,6 @@
 				<input class="sleepTimeMinIn" type="number">:<input class="sleepTimeMaxIn" type="number">
 				<div class="sleepTimeMaxMessage" style="float: left">
 					quiet time
-				</div>
-			</div>
-			<div class="mute">
-				<input class="muteIn" type="checkbox">
-				<div class="muteMessage" style="float: left">
-					mute
 				</div>
 			</div>
 		</div>
@@ -237,9 +231,6 @@
 						sleepTimeMinIn.max=Number(sleepTimeMaxIn.value);
 					}
 			}
-			var muteIn=document.querySelector('.muteIn');
-			muteIn.checked=!flag;
-			muteIn.addEventListener('input',function(){flag=!(muteIn.checked)});
 			var volumeIn=document.querySelector('.volumeIn');
 			volumeIn.value=volume;
 			volumeIn.addEventListener('input',function(){volume=volumeIn.value});
